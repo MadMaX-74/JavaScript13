@@ -47,8 +47,7 @@ let appData = {
             sum += appData.expenses[key]
             appData.expensesMonth = sum;
         }         
-        return sum,
-        console.log("Расходы за месяц составят" + sum + " рублей.");
+        return sum;
         
     },
     getBudget: function() {
