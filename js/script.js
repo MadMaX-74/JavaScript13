@@ -33,13 +33,13 @@ let appData = {
 
             for (let i = 0; i < 2; i++) {            
                     expens = prompt ('Введите обязательную статью расходов?', 'жкх');             
-                    do  {
+                    amount = prompt('Во сколько это обойдется?');
+                    while(!isNumber(amount)) {
                         amount = prompt('Во сколько это обойдется?');
-                    } while (!Number(amount));
-        
                 }
-                appData.expenses[expens] =+amount;
-    },    
+                appData.expenses[expens] = +amount;
+            }    
+    },          
     getExpensesMonth : function(){        
         let sum = 0;
         
@@ -70,7 +70,7 @@ let appData = {
     getStatusIncome : function () {
         if (appData.budgetDay > 1200){
             console.log ('У вас высокий уровень дохода');
-        }else if (appData.budgetDay <= 1200 && budgetDay >=600){
+        }else if (appData.budgetDay <= 1200 && appData.budgetDay >=600){
             console.log ('У вас средний уровень дохода');
         }else if (appData.budgetDay <0){
             console.log ('Что то пошло не так');
