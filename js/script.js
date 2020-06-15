@@ -51,7 +51,7 @@ let appData = {
                 while(!addExpenses.trim() || isNumber(addExpenses)){
                     addExpenses = prompt ('Перечислите возможные расходы за рассчитываемый период ', 'жкх бензин продукты');
                 }
-            
+            //функция для вывода с заглавной строки
             function toUpper(str) {
                     return str
                         .toLowerCase()
@@ -62,6 +62,7 @@ let appData = {
                         .join(', ');
             }
             console.log(toUpper(addExpenses));
+            //с помощью регулярки. Да здравствует Google=)))
             console.log(
                 addExpenses.split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(', ')
                 );
