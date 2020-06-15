@@ -23,11 +23,50 @@ let appData = {
     addExpenses: [],
     deposit: false,
     mission: 500000,
-    period: 10,    
+    period: 10,
+    percentDeposit: 0,
+    moneyDeposit: 0,    
     asking: function(){
+        let itemIncome;
+        let cashIncome;
+
+        if(confirm('Есть ли у вас дополнительный заработок?')) {
+
+            itemIncome = prompt('Какой у вас есть дополнительный заработок?', 'фриланс');
+            while(!itemIncome.trim() || isNumber(itemIncome)) {
+                 itemIncome = prompt('Какой у вас есть дополнительный заработок?', 'фриланс');
+            }
+            while(!isNumber(cashIncome)) {
+                 cashIncome = prompt('Сколько вы зарабатываете на этом?', 10000);
+            }
+            
+
+            appData.income[itemIncome] = cashIncome;
+
+        }
+
         let expens,
             amount,
-            addExpenses = prompt ('Перечислите возможные расходы за рассчитываемый период через запятую', 'жкх, бензин, продукты');
+            addExpenses = prompt ('Перечислите возможные расходы за рассчитываемый период ', 'жкх бензин продукты');
+                while(!addExpenses.trim() || isNumber(addExpenses)){
+                    addExpenses = prompt ('Перечислите возможные расходы за рассчитываемый период ', 'жкх бензин продукты');
+                }
+            
+            function toUpper(str) {
+                    return str
+                        .toLowerCase()
+                        .split(' ')
+                        .map(function(word) {
+                            return word[0].toUpperCase() + word.substr(1);
+                        })
+                        .join(', ');
+            }
+            console.log(toUpper(addExpenses));
+            console.log(
+                addExpenses.split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(', ')
+                );
+
+            
             appData.addExpenses = addExpenses.toLowerCase().split(",");
             appData.deposit = confirm ('Есть ли у вас депозит в банке?');
 
@@ -77,6 +116,24 @@ let appData = {
         }else{
             console.log ('К сожалению у вас уровень дохода ниже среднего');
         }
+    },
+    getInfoDeposit: function(){
+        if(appData.deposit){
+            appData.percentDeposit = prompt('Какой годовой процент?', 5);
+
+            while(!isNumber(appData.percentDeposit)) {
+                appData.percentDeposit = prompt('Какой годовой процент?', 5);
+            }
+
+            appData.moneyDeposit = prompt('Какая сумма заложена?', 500000);
+
+            while(!isNumber(appData.moneyDeposit)) {
+                appData.moneyDeposit = prompt('Какая сумма заложена?', 500000);
+            }
+        }
+    },
+    calcSavedMoney: function () {  
+        return appData.budgetMonth * appData.period;
     } 
 };
 appData.asking();
@@ -84,6 +141,8 @@ appData.getExpensesMonth();
 appData.getBudget();
 appData.getTargetMonth();
 appData.getStatusIncome();
+appData.getInfoDeposit();
+appData.calcSavedMoney();
 
 
 for (let key in appData) {
