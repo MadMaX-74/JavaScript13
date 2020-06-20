@@ -200,7 +200,7 @@ start.addEventListener('click', appData.start);
 incomeAdd.addEventListener('click', appData.addIncomeBlock);
 expensesAdd.addEventListener('click', appData.addExpensesBlock);
 periodSelect.addEventListener('input', appData.getPeriod);
-salaryAmount.addEventListener('change', appData.check);
+salaryAmount.addEventListener('input', appData.check);
 
 
 /* 
