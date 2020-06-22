@@ -65,7 +65,7 @@ let appData = {
 
         console.log(this);
 
-        let dataInput = document.querySelectorAll('input[type=text]');
+        let dataInput = document.querySelectorAll('.data input[type=text]');
         console.log(dataInput);
         for (let key in dataInput){
             dataInput[key].setAttribute("disabled", "disabled");
