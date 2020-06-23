@@ -224,9 +224,9 @@ let appData = {
             item.removeAttribute("disabled");
         });
         
-        for(let i = 1; i < incomeItem.length; i++) {
-            if (incomeItem.length > 1) {
-                incomeItem[i].remove();
+        for(let i = 1; i < incomeItems.length; i++) {
+            if (incomeItems.length > 1) {
+                incomeItems[i].remove();
             };
         };
 
