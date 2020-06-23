@@ -61,7 +61,7 @@ let appData = {
         this.getAddExpenses();
         this.getAddIncome();        
         this.getBudget();
-        this.showResult();
+        
 
         console.log(this);
 
@@ -71,7 +71,7 @@ let appData = {
             item.setAttribute("disabled", "disabled");
         });
         
-        
+        this.showResult();
     },    
     //тут проверяем на атрибут для кнопки Расчитать
     check: function() {
