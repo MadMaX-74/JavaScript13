@@ -86,7 +86,7 @@ let appData = {
     },
     changeIncomePeriodValue: function() {
 
-        incomePeriod.value = this.calcPeriod();
+        incomePeriod.value = appData.calcPeriod();
     },
     showResult: function(){
         budgetMonth.value = this.budgetMonth;
