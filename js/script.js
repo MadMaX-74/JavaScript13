@@ -225,8 +225,8 @@ let appData = {
         });
         
         for(let i = 1; i < incomeItems.length; i++) {
-            if (incomeItem.length > 1) {
-                incomeItem[i].remove();
+            if (incomeItems.length > 1) {
+                incomeItems[i].remove();
             };
         };
 
