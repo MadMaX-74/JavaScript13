@@ -67,12 +67,12 @@ let appData = {
 
         let dataInput = document.querySelectorAll('.data input[type=text]');
         console.log(dataInput);
-        for (let key in dataInput){
-            dataInput[key].setAttribute("disabled", "disabled");
-        };
+        dataInput.forEach(function(item) {
+            item.setAttribute("disabled", "disabled");
+        });
         
         
-    },
+    },    
     //тут проверяем на атрибут для кнопки Расчитать
     check: function() {
         if(salaryAmount.value !== '') {
