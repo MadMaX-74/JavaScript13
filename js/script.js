@@ -208,9 +208,40 @@ let appData = {
         start.style.display = 'none';
         cancel.style.display = 'block'; 
     },
-    reset: function (){
-        location.reload();
-    } 
+    reset: function (){        
+        cancel.style.display = 'none';
+        start.style.display = 'block';
+
+        periodAmount.textContent = '1';        
+        periodSelect.value = 1;    
+        
+        incomeAdd.style.display = 'block';
+        expensesAdd.style.display = 'block';
+
+        let dataInput = document.querySelectorAll("input[type='text']");
+
+        dataInput.forEach(function(item) {
+            item.removeAttribute("disabled");
+        });
+        
+        for(let i = 1; i < incomeItem.length; i++) {
+            if (incomeItem.length > 1) {
+                incomeItem[i].remove();
+            };
+        };
+
+        for(let i = 1; i < expensesItems.length; i++) {
+            if (expensesItems.length > 1) {
+                expensesItems[i].remove();
+            };
+        };
+
+        dataInput.forEach(function(item) {
+            if (item.value !== '') {
+                item.value = '';
+            };
+        });
+    }
 };
 
 start.addEventListener('click', appData.start.bind(appData));
