@@ -25,8 +25,8 @@ let   start = document.getElementById('start'), //кнопка расчитат�
         additionalEpensesItem = document.querySelector('.additional_expenses-item'), // возможные расходы
         periodSelect = document.querySelector('.period-select'), // тумблер
         targetAmount = document.querySelector('.target-amount'),//цель
-        periodAmount = document.querySelector('.period-amount'),//текст под тумблером 
-        incomeItem = document.querySelectorAll('.income-items'); //доп доход
+        periodAmount = document.querySelector('.period-amount');//текст под тумблером 
+       
 
 const AppData = function(){
     this.budget =  0;
@@ -94,7 +94,7 @@ AppData.prototype.showResult = function(){
         incomePeriod.value = _this.calcPeriod();
     });
 };
-AppData.prototypeaddExpensesBlock= function (){        
+AppData.prototype.addExpensesBlock= function (){        
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesAdd);
     expensesItems = document.querySelectorAll('.expenses-items');        
@@ -122,8 +122,8 @@ AppData.prototype.getExpenses = function () {
 };
 AppData.prototype.getIncome = function(){
     const _this = this;
-    incomeItem.forEach(function (item) {
-        let itemIncome = item.querySelector('.income-title').value;
+    incomeItems.forEach(function (item) {
+        let itemIncome = item.querySelector('input.income-title').value;
         let cashIncome = item.querySelector('.income-amount').value;
         if (itemIncome !== '' && cashIncome !==''){
             _this.income[itemIncome] = +cashIncome;
@@ -141,7 +141,7 @@ AppData.prototype.getAddExpenses= function (){
     addExpenses.forEach(function(item){
         item = item.trim();
         if (item !== ''){
-            _this.addExpenses.push(item);
+            _this.addExpenses.push(itemValue);
         }
     });
 };
@@ -150,7 +150,7 @@ AppData.prototype.getAddIncome = function () {
     additionalIncomeItem.forEach(function (item) { 
         let itemValue = item.value.trim();
         if (itemValue !== ''){
-            _this.addIncome.push(itemValue);
+            _this.addIncome.push(item);
         }
      });
 };   
