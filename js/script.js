@@ -27,6 +27,8 @@ let   start = document.getElementById('start'), //кнопка расчитат�
         targetAmount = document.querySelector('.target-amount'),//цель
         periodAmount = document.querySelector('.period-amount');//текст под тумблером 
        
+        cancel.setAttribute("disabled", true);
+        start.setAttribute("disabled", true);
 
 const AppData = function(){
     this.budget =  0;
@@ -46,20 +48,14 @@ const AppData = function(){
 };
 
 AppData.prototype.check = function() {
-    if(salaryAmount.value !== '') {
+    if(salaryAmount.value !== '' || !isNumber(salaryAmount.value)) {
         start.removeAttribute("disabled");
-    } else {
-        start.setAttribute("disabled", "disabled");
-    }
+    } 
 };
-AppData.prototype.start = function(){
-    if(salaryAmount.value === ''){
-        alert ('Ошибка поля "Месячный доход" должно быть заполнено!');
-        return;
-    }       
+AppData.prototype.start = function(){           
 
     this.budget = +salaryAmount.value;
-
+    this.check();
     this.getExpenses();    
     this.getIncome();    
     this.getExpensesMonth();  
@@ -205,8 +201,10 @@ AppData.prototype.calcPeriod = function () {
     return this.budgetMonth * periodSelect.value;
 };
 AppData.prototype.visibleButton = function () {
+    start.setAttribute("disabled", "disabled");
     start.style.display = 'none';
-    cancel.style.display = 'block'; 
+    cancel.style.display = 'block';
+    cancel.removeAttribute("disabled"); 
 };
 AppData.prototype.reset = function (){
     this.addExpenses.length = 0;
@@ -220,7 +218,10 @@ AppData.prototype.reset = function (){
     for (let key in this.expenses) delete this.expenses[key];
     for (let key in this.income) delete this.income[key]; 
 
+    
+    cancel.setAttribute("disabled", "disabled");
     cancel.style.display = 'none';
+    start.removeAttribute("disabled");
     start.style.display = 'block';
 
     periodAmount.textContent = '1';        
@@ -252,6 +253,9 @@ AppData.prototype.reset = function (){
             item.value = '';
         };
     });
+
+    start.setAttribute("disabled", true);
+
 };
 
 AppData.prototype.eventListeners = function(){
