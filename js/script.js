@@ -252,6 +252,8 @@ let appData = {
                 item.value = '';
             };
         });
+
+        start.setAttribute("disabled", true);
     }
 };
 
