@@ -209,15 +209,16 @@ AppData.prototype.visibleButton = function () {
     cancel.style.display = 'block'; 
 };
 AppData.prototype.reset = function (){
+    this.addExpenses.length = 0;
+    this.addIncome.length = 0;
     this.budget = 0;
     this.budgetDay = 0;
     this.budgetMonth = 0;
     this.expensesMonth = 0;
-    this.incomeMonth = 0;
-    this.mission = 0;
+    this.incomeMonth = 0;      
 
     for (let key in this.expenses) delete this.expenses[key];
-    for (let key in this.income) delete this.income[key];
+    for (let key in this.income) delete this.income[key]; 
 
     cancel.style.display = 'none';
     start.style.display = 'block';
@@ -257,7 +258,7 @@ AppData.prototype.eventListeners = function(){
     let _this = this;
     start.addEventListener('click', _this.start.bind(this));
     start.addEventListener('click', _this.visibleButton); 
-    cancel.addEventListener('click',_this.reset);
+    cancel.addEventListener('click',_this.reset.bind(this));
     incomeAdd.addEventListener('click', _this.addIncomeBlock);
     expensesAdd.addEventListener('click', _this.addExpensesBlock);
     periodSelect.addEventListener('input', _this.getPeriod);
