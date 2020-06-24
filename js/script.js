@@ -25,9 +25,8 @@ let   start = document.getElementById('start'), //кнопка расчитат�
         additionalEpensesItem = document.querySelector('.additional_expenses-item'), // возможные расходы
         periodSelect = document.querySelector('.period-select'), // тумблер
         targetAmount = document.querySelector('.target-amount'),//цель
-        periodAmount = document.querySelector('.period-amount'),//текст под тумблером 
-        incomeItem = document.querySelectorAll('.income-items'); //доп доход
-
+        periodAmount = document.querySelector('.period-amount');//текст под тумблером 
+        
 
  
 start.setAttribute("disabled", "disabled");// Расчитать отключена
@@ -123,18 +122,17 @@ let appData = {
             }
         });
     },
-    getIncome: function(){
-        incomeItem.forEach(function (item) {
-            let itemIncome = item.querySelector('.income-title').value;
+    getIncome: function() {
+        incomeItems.forEach(function(item) {
+            let itemIncome = item.querySelector('input.income-title').value;
             let cashIncome = item.querySelector('.income-amount').value;
-            if (itemIncome !== '' && cashIncome !==''){
+            console.log(this);
+            if(itemIncome !== '' && cashIncome !== '') {
                 appData.income[itemIncome] = +cashIncome;
             }
         });
-        
-        
-        for (let key in appData.income){
-            this.incomeMonth += +this.income[key];
+        for (let key in appData.income) {
+            appData.incomeMonth += +appData.income[key];
         }
     },
     getAddExpenses: function (){
@@ -146,13 +144,14 @@ let appData = {
             }
         });
     },
-    getAddIncome: function () { 
-        additionalIncomeItem.forEach(function (item) { 
+    getAddIncome: function() {
+        additionalIncomeItem.forEach(function(item) {
             let itemValue = item.value.trim();
-            if (itemValue !== ''){
+            if(itemValue !== '') {
                 appData.addIncome.push(itemValue);
             }
-         });
+
+        });
     },   
     getExpensesMonth : function(){        
         let sum = 0;
