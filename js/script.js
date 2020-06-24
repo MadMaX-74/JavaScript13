@@ -208,7 +208,19 @@ AppData.prototype.visibleButton = function () {
     start.style.display = 'none';
     cancel.style.display = 'block'; 
 };
-AppData.prototype.reset = function (){        
+AppData.prototype.reset = function (){
+    this.addExpenses.length = 0;
+    this.addIncome.length = 0;
+    this.budget = 0;
+    this.budgetDay = 0;
+    this.budgetMonth = 0;
+    this.expensesMonth = 0;
+    this.incomeMonth = 0;
+    this.mission = 0;
+
+    for (let key in this.expenses) delete this.expenses[key];
+    for (let key in this.income) delete this.income[key];
+            
     cancel.style.display = 'none';
     start.style.display = 'block';
 
