@@ -25,9 +25,8 @@ let   start = document.getElementById('start'), //кнопка расчитат�
         additionalEpensesItem = document.querySelector('.additional_expenses-item'), // возможные расходы
         periodSelect = document.querySelector('.period-select'), // тумблер
         targetAmount = document.querySelector('.target-amount'),//цель
-        periodAmount = document.querySelector('.period-amount');//текст под тумблером 
-       
-        cancel.setAttribute("disabled", true);
+        periodAmount = document.querySelector('.period-amount');//текст под тумблером        
+        
         start.setAttribute("disabled", true);
 
 const AppData = function(){
@@ -201,10 +200,8 @@ AppData.prototype.calcPeriod = function () {
     return this.budgetMonth * periodSelect.value;
 };
 AppData.prototype.visibleButton = function () {
-    start.setAttribute("disabled", "disabled");
     start.style.display = 'none';
-    cancel.style.display = 'block';
-    cancel.removeAttribute("disabled"); 
+    cancel.style.display = 'block'; 
 };
 AppData.prototype.reset = function (){
     this.addExpenses.length = 0;
@@ -219,9 +216,7 @@ AppData.prototype.reset = function (){
     for (let key in this.income) delete this.income[key]; 
 
     
-    cancel.setAttribute("disabled", "disabled");
     cancel.style.display = 'none';
-    start.removeAttribute("disabled");
     start.style.display = 'block';
 
     periodAmount.textContent = '1';        
