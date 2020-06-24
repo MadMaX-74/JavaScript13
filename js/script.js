@@ -141,7 +141,7 @@ AppData.prototype.getAddExpenses= function (){
     addExpenses.forEach(function(item){
         item = item.trim();
         if (item !== ''){
-            _this.addExpenses.push(itemValue);
+            _this.addExpenses.push(item);
         }
     });
 };
@@ -150,7 +150,7 @@ AppData.prototype.getAddIncome = function () {
     additionalIncomeItem.forEach(function (item) { 
         let itemValue = item.value.trim();
         if (itemValue !== ''){
-            _this.addIncome.push(item);
+            _this.addIncome.push(itemValue);
         }
      });
 };   
