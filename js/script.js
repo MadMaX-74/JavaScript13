@@ -53,21 +53,7 @@ class AppData {
         return!isNaN( parseFloat(testNumber) )  &&  isFinite(testNumber);
     }
 
-    check() {
-        if (salaryAmount.value === '' || !this.isNumber(salaryAmount.value)) {
-            alert('Используйте только цифры для ввода месячного дохода.');
-            start.setAttribute("disabled", true);
-            return;
-        }
-
-        if (this.deposit === true) {
-            if ( (!this.isNumber(depositPercent.value)) || (parseFloat(depositPercent.value) < 0) || (parseFloat(depositPercent.value) > 100)) {
-                start.setAttribute('disabled', true);
-                alert('Процент должен быть числом от 1 до 100.');
-                return;
-            }
-        }
-    }
+    
 
     start(){        
         salaryAmount.value = salaryAmount.value.trim();
@@ -86,8 +72,7 @@ class AppData {
             }
         }
 
-        this.budget = +salaryAmount.value;
-        this.check();
+        this.budget = +salaryAmount.value;       
         this.getExpenses();    
         this.getIncome();    
         this.getExpensesMonth();  
@@ -346,9 +331,26 @@ class AppData {
         incomeAdd.addEventListener('click', _this.addIncomeBlock);
         expensesAdd.addEventListener('click', _this.addExpensesBlock);
         periodSelect.addEventListener('input', _this.getPeriod);
-        salaryAmount.addEventListener('input', _this.check);
+        salaryAmount.addEventListener('input',  function() {
+
+            salaryAmount.value = salaryAmount.value.trim();
+            if(salaryAmount.value !== '' && _this.isNumber(salaryAmount.value)) {
+                start.removeAttribute("disabled");
+            } else {
+                alert('Используйте только цифры для ввода месячного дохода.');
+                start.setAttribute("disabled", true);
+            }
+
+    });
         depositCheck.addEventListener('change', this.depositHandler.bind(this));
-        depositPercent.addEventListener('change', this.checkPercent.bind(this));
+        depositPercent.addEventListener('input', function() {
+            if ( (!_this.isNumber(depositPercent.value)) || (parseFloat(depositPercent.value) <0) || (parseFloat(depositPercent.value) > 100)) {
+                start.setAttribute('disabled', true);
+                alert('Процент должен быть числом от 1 до 100.');
+        } else {
+            start.removeAttribute('disabled');
+        }
+        });
     }
 
 };
