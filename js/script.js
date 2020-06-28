@@ -54,16 +54,36 @@ class AppData {
     }
 
     check() {
-        if(salaryAmount.value !== '') {
-            start.removeAttribute("disabled");
-        } 
+        if (salaryAmount.value === '' || !this.isNumber(salaryAmount.value)) {
+            alert('Используйте только цифры для ввода месячного дохода.');
+            start.setAttribute("disabled", true);
+            return;
+        }
+
+        if (this.deposit === true) {
+            if ( (!this.isNumber(depositPercent.value)) || (parseFloat(depositPercent.value) < 0) || (parseFloat(depositPercent.value) > 100)) {
+                start.setAttribute('disabled', true);
+                alert('Процент должен быть числом от 1 до 100.');
+                return;
+            }
+        }
     }
 
     start(){        
         salaryAmount.value = salaryAmount.value.trim();
-        if (!this.isNumber(salaryAmount.value)) {
+
+        if (salaryAmount.value === '' || !this.isNumber(salaryAmount.value)) {
             alert('Используйте только цифры для ввода месячного дохода.');
+            start.setAttribute("disabled", true);
             return;
+        }
+
+        if (this.deposit === true) {
+            if ( (!this.isNumber(depositPercent.value)) || (parseFloat(depositPercent.value) < 0) || (parseFloat(depositPercent.value) > 100)) {
+                start.setAttribute('disabled', true);
+                alert('Процент должен быть числом от 1 до 100.');
+                return;
+            }
         }
 
         this.budget = +salaryAmount.value;
@@ -298,17 +318,8 @@ class AppData {
 
             console.log(valueSelect);
         }
-    }
-
-    checkPercent() {
-        if ( (!this.isNumber(depositPercent.value)) || (parseFloat(depositPercent.value) <0) || (parseFloat(depositPercent.value) > 100)) {
-                alert('Введите число от 1 до 100.');
-                start.setAttribute('disabled', true);
-                return;
-        } else {
-            start.removeAttribute('disabled');
-        } return depositPercent.value;
-    }
+    } 
+        
 
     depositHandler() {
         if (depositCheck.checked) {
