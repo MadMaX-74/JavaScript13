@@ -1,105 +1,66 @@
-import mainForm from './mainForm';
-const sendForm = form => {
-    const errorMessage = 'Что-то пошло не так...',
-        loadMessage = 'Загрузка...',
-        successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
+import closeForm from './closeForm';
+import checkConsent from './checkConsent';
+const sendForm = () => {
+        const loadMessage = '<img src="./images/eclipse.svg">';
+        
+    
+    document.addEventListener('submit', (event) => {
+        const target = event.target;
+        
+        if(target.closest('form')) {
+            event.preventDefault();
+            
+            const form = target.closest('form');
+            if(!checkConsent(form)) return;
+            
+            const thanks = document.getElementById('thanks');    
 
-    const statusMessage = document.createElement('div');
-    statusMessage.style.cssText = 'font-size: 2rem;';
-
-    if (form.id === 'form2' ||
-		form.id === 'form1' ||
-		form.id === 'footer_form') {
-        statusMessage.style.color = '#FFFFFF';
-    }
-
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-
-        let body = {};
+            const formData = new FormData(form);
+            let body = {};
             formData.forEach((val, key) => {
                 body[key] = val;
             });
             form.reset();
 
-        let valid = true;
-
-        elementsForm.forEach(e => {
-            try {
-                if (e.type === 'checkbox') {
-                    if (!e.checked) {
-                        alert('Необходимо подтвердить согласие!');
-                        throw new Error('Необходимо подтвердить согласие');
+            postData(body)
+            .then((response) => {
+                if(response.status !== 200) {
+                    throw new Error('status network not 200');
+                }
+                    if(form.closest('.popup')) {
+                        form.style.display = 'none';
+                        form.closest('.popup').style.display = 'none';
                     }
-                }
-                if (e.classList.contains('error-input')) {
-                    valid = false;
-                    throw new Error('неверно заполненное поле');
-                }
-            } catch (error) {
-                if (error) {
-                    valid = false;
-                }
-            }
-        });
+                    thanks.style.display = 'block';
+                    closeForm(thanks);
 
-        const postData = body => fetch('server.php', {
+            })
+            .catch((error) => {
+                    if(form.closest('.popup')) {
+                    form.style.display = 'none';
+                    form.closest('.popup').style.display = 'none';
+                }
+
+                thanks.querySelector('.form-wrapper').querySelector('.form-content').innerHTML = `<h4>Что-то пошло не так...</h4>
+                <p>Повторите попытку позже.</p>
+                <button class="btn close-btn">OK</button>`;
+                thanks.style.display = 'block';
+                closeForm(thanks);
+            });
+        }
+
+    });
+
+    const postData = (body) => {
+        return fetch('./server.php', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'aplication/json'
             },
             body: JSON.stringify(body)
         });
-
-        /* const clearForm = () => {
-            for (const el of form.elements) {
-                if (
-                    el.tagName.toLowerCase() !== 'button' &&
-					el.type !== 'button' &&
-					e.type !== 'hidden'
-                ) {
-                    el.value = '';
-                }
-            }
-            setTimeout(() => statusMessage.remove(), 5000);
-        }; */
-
-        if (valid) {
-            form.appendChild(statusMessage);
-
-            statusMessage.textContent = loadMessage;
-
-            postData(formData)
-                .then(response => {
-                    if (response.status !== 200) {
-                        if (form.id === 'banner-form' ||
-							form.id === 'footer_form' || form.id === 'form2' ||
-                            form.id === 'form1') {
-                            mainForm(false);
-                            statusMessage.remove();
-                        }
-                        throw new Error('status network not 200');
-                    } else if (form.id === 'banner-form' ||
-						form.id === 'footer_form' || form.id === 'form2' ||
-                        form.id === 'form1') {
-                        mainForm(true);
-                        statusMessage.remove();
-                    } else {
-                        statusMessage.textContent = successMessage;
-                    }
-                })
-                .catch(error => {
-                    if (form.id !== 'banner-form' ||
-						form.id !== 'footer_form') {
-                        statusMessage.textContent = errorMessage;
-                    }
-                    console.error(error);
-                });
-            form.reset();
-        }
-    });
+    };
 };
+
 
 export default sendForm;
