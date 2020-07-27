@@ -18,19 +18,11 @@ const sendForm = form => {
 
         const formData = new FormData(form);
 
-        let elementsForm = [...form.elements].filter(
-            e => e.type.toLowerCase() !== 'button' &&
-			e.type !== 'submit' &&
-			e.type !== 'hidden'
-        );
-
-        for (const key in elementsForm) {
-            const elem = elementsForm[key];
-            if (elem.parentNode.classList.contains('club') && !elem.checked) {
-                delete elementsForm[key];
-            }
-        }
-        elementsForm = elementsForm.filter(String);
+        let body = {};
+            formData.forEach((val, key) => {
+                body[key] = val;
+            });
+            form.reset();
 
         let valid = true;
 
@@ -48,21 +40,20 @@ const sendForm = form => {
                 }
             } catch (error) {
                 if (error) {
-                    console.error(error);
                     valid = false;
                 }
             }
         });
 
-        const postData = formData => fetch('server.php', {
+        const postData = body => fetch('server.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: formData
+            body: JSON.stringify(body)
         });
 
-        const clearForm = () => {
+        /* const clearForm = () => {
             for (const el of form.elements) {
                 if (
                     el.tagName.toLowerCase() !== 'button' &&
@@ -73,7 +64,7 @@ const sendForm = form => {
                 }
             }
             setTimeout(() => statusMessage.remove(), 5000);
-        };
+        }; */
 
         if (valid) {
             form.appendChild(statusMessage);
@@ -106,7 +97,7 @@ const sendForm = form => {
                     }
                     console.error(error);
                 });
-            clearForm();
+            form.reset();
         }
     });
 };
