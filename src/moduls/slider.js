@@ -118,7 +118,7 @@ const slider = () => {
     galleryWrap.addEventListener('mouseout', e => {
         if (e.target.matches('.slider-arrow') ||
         e.target.matches('.dot')) {
-            stopSlide();
+            startSlide();
         }
     });
 
