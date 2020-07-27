@@ -1,6 +1,4 @@
-'use strict';
 
-// Валидатор
 const validator = () => {
     document.addEventListener('input', (event) => {
         const target = event.target;

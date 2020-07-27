@@ -1,6 +1,4 @@
-'use strict';
 
-// Закрытие модального окна
 const closeForm = (popUp) => {
     popUp.addEventListener('click', (e) => {
         let target = e.target;

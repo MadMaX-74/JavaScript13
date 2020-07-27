@@ -1,9 +1,7 @@
 import closeForm from './closeForm';
 import checkConsent from './checkConsent';
-const sendForm = () => {
-        const loadMessage = '<img src="./images/eclipse.svg">';
-        
-    
+
+const sendForm = () => {   
     document.addEventListener('submit', (event) => {
         const target = event.target;
         

@@ -1534,9 +1534,9 @@ nav.popup-menu .close-menu-btn img {
     padding: 5px 5px 5px 18px;
     margin-right: 5px
 }
-#services{
+/* #services{
     position: relative;     
-}
+} */
 .services-slider {
     display: flex;
     margin: 0 auto;
@@ -1546,8 +1546,6 @@ nav.popup-menu .close-menu-btn img {
 
 .services-slider .slide {
     text-align: center;
-    margin-right: 6px;
-    margin-left: 6px;
     width: 210px
     
 }
@@ -1571,10 +1569,13 @@ nav.popup-menu .close-menu-btn img {
     padding-left: 10px;
     padding-right: 10px;
     max-width: 200px;
-    margin: 0 auto
+    margin: 0 auto;
+    
 }
 
 .slider-arrow__span {
+    position: absolute;
+    top: 50%;
     display: block;
     width: 36px;
     height: 37px;
@@ -1583,6 +1584,8 @@ nav.popup-menu .close-menu-btn img {
     text-align: center;
     padding-top: 8px;
     font-size: 20px;
+    transform: translate(0, -50%);
+    z-index: 100;
 }
 
 .slider-arrow__prev {
@@ -1590,8 +1593,7 @@ nav.popup-menu .close-menu-btn img {
     top: 50%;
     z-index: 100;
     cursor: pointer;
-    left: 0;
-    margin-left: 10px;
+    left: 2px;
     
 }
 
@@ -1600,8 +1602,7 @@ nav.popup-menu .close-menu-btn img {
     top: 50%;
     z-index: 99999;
     cursor: pointer;
-    right: 0;
-    margin-right: 10px;
+    right: 2px;
 }
 
 #gallery {

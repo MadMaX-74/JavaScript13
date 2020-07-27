@@ -61,18 +61,19 @@ class SliderCarousel {
                 overflow: hidden !important;                
                 margin: 0 auto;
                 padding: 0;
+                position: relative;               
             }
             .glo-slider__wrap{             
-                display: flex !important; 
+                display: flex !important;
+                align-items: start !important;
                 transition: transform 0.5s !important;
                 will-change: transform !important;
                 padding: 0;
-                
+                margin: 0 auto;
             }
             .glo-slider__item{
                 display:flex !important;
                 flex-direction: column !important;
-                justify-content: center;
                 align-items: center !important;                   
                 flex: 0 0 ${this.options.widthSlide}% !important;
                 

@@ -118,12 +118,12 @@ const slider = () => {
     galleryWrap.addEventListener('mouseout', e => {
         if (e.target.matches('.slider-arrow') ||
         e.target.matches('.dot')) {
-            startSlide();
+            startSlider();
         }
     });
 
     createDots();
-    startSlider(3000);
+    startSlider(2000);
 };
 
 export default slider;

@@ -7,4 +7,4 @@ const checkPromo = (str, elem, value) => {
     }
 };
 
-export default checkPromo;
+export default checkPromo;2
