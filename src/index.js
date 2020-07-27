@@ -13,6 +13,8 @@ import 'mdn-polyfills/Node.prototype.append';
 
 import selectClub from './moduls/selectClub';
 import togglePopUp from './moduls/togglePopUp';
+import freeVisitForm from './moduls/freeVisitForm';
+import callbackForm from './moduls/callbackForm';
 import gift from './moduls/gift';
 import mainSlider from './moduls/mainSlider';
 import slider from './moduls/slider';
@@ -27,6 +29,8 @@ import sendForm from './moduls/sendForm';
 
 selectClub();//club select
 togglePopUp();//modals
+freeVisitForm();
+callbackForm();
 gift();//gift
 mainSlider(); // main slider
 slider();//slide
